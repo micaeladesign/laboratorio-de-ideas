@@ -492,14 +492,50 @@ header {
 }
 
 
-.sprint-example-pages a {
-  display: block;
+.sprint-example-zoom {
+  position: relative;
 
+  display: block;
+  width: 100%;
+
+  padding: 0;
+
+  background: none;
   border: 1px solid var(--color-outline-variant);
   border-radius: 12px;
   overflow: hidden;
 
+  cursor: zoom-in;
+
   transition: transform 150ms ease;
+}
+
+
+.sprint-example-zoom:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+
+/* Lupa en la esquina, para que se note que se puede ampliar */
+.sprint-example-zoom-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary);
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -511,7 +547,7 @@ header {
 }
 
 
-.sprint-example-pages span {
+.sprint-example-pages li > span {
   display: block;
 
   margin-top: 8px;
@@ -525,7 +561,7 @@ header {
 
 @media (hover: hover) {
 
-  .sprint-example-pages a:hover {
+  .sprint-example-zoom:hover {
     transform: translateY(-2px);
   }
 
@@ -887,6 +923,177 @@ footer a:hover {
 
   #lab {
     padding-top: 48px;
+  }
+
+}
+
+
+/* --------------------------------
+   LUPA (vista ampliada de las páginas de Brote)
+-------------------------------- */
+
+.lab-zoom {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: rgba(17, 17, 17, 0.92);
+  color: #FFFFFF;
+}
+
+
+.lab-zoom::backdrop {
+  background: transparent;
+}
+
+
+.lab-zoom figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  height: 100%;
+
+  margin: 0;
+  padding: 64px 16px 24px;
+}
+
+
+.lab-zoom img {
+  display: block;
+
+  max-width: min(100%, 1600px);
+  max-height: calc(100vh - 140px);
+  width: auto;
+  height: auto;
+
+  border-radius: 8px;
+}
+
+
+.lab-zoom figcaption {
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.8;
+}
+
+
+.lab-zoom figcaption small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+
+.lab-zoom img {
+  cursor: zoom-in;
+}
+
+
+/* Acercada: la imagen se agranda y se recorre con scroll o con el dedo */
+.lab-zoom figure.is-zoomed {
+  display: block;
+
+  overflow: auto;
+
+  padding: 72px 16px 88px;
+}
+
+
+.lab-zoom figure.is-zoomed img {
+  width: min(2400px, 220vw);
+  max-width: none;
+  max-height: none;
+
+  cursor: zoom-out;
+}
+
+
+.lab-zoom figure.is-zoomed figcaption {
+  display: none;
+}
+
+
+.lab-zoom button {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+
+  font-family: inherit;
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+.lab-zoom button:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+
+.lab-zoom button:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+
+.lab-zoom-close {
+  top: 12px;
+  right: 12px;
+}
+
+
+.lab-zoom-nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.lab-zoom-prev {
+  left: 12px;
+}
+
+
+.lab-zoom-next {
+  right: 12px;
+}
+
+
+/* En el celu las flechas van abajo, para no tapar la imagen */
+@media (max-width: 599px) {
+
+  .lab-zoom-nav {
+    top: auto;
+    bottom: 16px;
+    transform: none;
+  }
+
+  .lab-zoom figure {
+    padding-bottom: 80px;
+  }
+
+  .lab-zoom img {
+    max-height: calc(100vh - 180px);
   }
 
 }

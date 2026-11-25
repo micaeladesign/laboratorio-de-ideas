@@ -82,6 +82,7 @@
       ],
       examplePdf: "assets/brote/ejemplo-brote.pdf",
       exampleButton: "Ver el informe completo (PDF)",
+      zoom: { open: "Ampliar", close: "Cerrar", prev: "Anterior", next: "Siguiente", hint: "Tocá la imagen para acercar" },
 
       aboutTitle: "¿Quién está detrás?",
       about: [
@@ -167,6 +168,7 @@
       ],
       examplePdf: "assets/brote/ejemplo-brote.pdf",
       exampleButton: "See the full report (PDF)",
+      zoom: { open: "Enlarge", close: "Close", prev: "Previous", next: "Next", hint: "Tap the image to zoom in" },
 
       aboutTitle: "Who's behind it?",
       about: [
@@ -204,6 +206,8 @@
   // Formulario: los mensajes llegan por mail a través de Web3Forms (web3forms.com).
   // Esta clave es pública por diseño: solo sirve para mandarte mensajes a vos.
   const WEB3FORMS_KEY = "1868d9a2-faff-4bb5-a72d-20b61a4f622c";
+
+  const ICON_ZOOM = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg>';
 
   let lang = null;
 
@@ -281,11 +285,12 @@
         <p class="sprint-example-badge">${escapeHtml(text.exampleBadge)}</p>
         <p>${rich(text.exampleText)}</p>
         <ul class="sprint-example-pages">
-          ${text.examplePages.map((page) => `
+          ${text.examplePages.map((page, index) => `
             <li>
-              <a href="${text.examplePdf}" target="_blank" rel="noopener">
+              <button type="button" class="sprint-example-zoom" data-index="${index}" aria-label="${escapeHtml(text.zoom.open)}: ${escapeHtml(page.caption)}">
                 <img src="${page.src}" alt="${escapeHtml(page.caption)}" width="1200" height="676" loading="lazy">
-              </a>
+                <span class="sprint-example-zoom-icon" aria-hidden="true">${ICON_ZOOM}</span>
+              </button>
               <span>${escapeHtml(page.caption)}</span>
             </li>`).join("")}
         </ul>
@@ -338,6 +343,82 @@
 
     document.querySelector(".language-switcher").setAttribute("aria-label", text.langLabel);
   }
+
+
+  // ------------------------------------------------------------
+  //  Lupa: las páginas de Brote se ven grandes al tocarlas
+  //  (usa la versión "-grande" de cada imagen)
+  // ------------------------------------------------------------
+
+  const zoom = document.createElement("dialog");
+  zoom.className = "lab-zoom";
+  document.body.appendChild(zoom);
+
+  let zoomIndex = 0;
+
+  function bigSrc(src) {
+    return src.replace(/\.webp$/, "-grande.webp");
+  }
+
+  function showZoom(index) {
+
+    const text = TEXTOS[lang];
+    const pages = text.examplePages;
+
+    zoomIndex = (index + pages.length) % pages.length;
+
+    const page = pages[zoomIndex];
+
+    zoom.innerHTML = `
+      <figure>
+        <img src="${bigSrc(page.src)}" alt="${escapeHtml(page.caption)}" width="2400" height="1351">
+        <figcaption>${escapeHtml(page.caption)} · ${zoomIndex + 1}/${pages.length}<br><small>${escapeHtml(text.zoom.hint)}</small></figcaption>
+      </figure>
+      <button type="button" class="lab-zoom-close" data-zoom="close" aria-label="${escapeHtml(text.zoom.close)}">×</button>
+      <button type="button" class="lab-zoom-nav lab-zoom-prev" data-zoom="prev" aria-label="${escapeHtml(text.zoom.prev)}">‹</button>
+      <button type="button" class="lab-zoom-nav lab-zoom-next" data-zoom="next" aria-label="${escapeHtml(text.zoom.next)}">›</button>`;
+
+    if (!zoom.open) zoom.showModal();
+
+    zoom.querySelector(".lab-zoom-close").focus();
+  }
+
+  section.addEventListener("click", (event) => {
+    const button = event.target.closest(".sprint-example-zoom");
+    if (button) showZoom(Number(button.dataset.index));
+  });
+
+  zoom.addEventListener("click", (event) => {
+    const action = event.target.closest("[data-zoom]")?.dataset.zoom;
+    if (action === "close") zoom.close();
+    else if (action === "prev") showZoom(zoomIndex - 1);
+    else if (action === "next") showZoom(zoomIndex + 1);
+    // Tocar la imagen acerca (o vuelve a alejar), centrado donde tocaste
+    else if (event.target.tagName === "IMG") toggleCloseUp(event);
+    // Tocar el fondo oscuro también cierra
+    else if (event.target === zoom || event.target.tagName === "FIGURE") zoom.close();
+  });
+
+  function toggleCloseUp(event) {
+
+    const figure = zoom.querySelector("figure");
+    const image = event.target;
+    const box = image.getBoundingClientRect();
+    const x = (event.clientX - box.left) / box.width;
+    const y = (event.clientY - box.top) / box.height;
+
+    figure.classList.toggle("is-zoomed");
+
+    if (figure.classList.contains("is-zoomed")) {
+      figure.scrollLeft = x * image.offsetWidth - figure.clientWidth / 2;
+      figure.scrollTop = y * image.offsetHeight - figure.clientHeight / 2;
+    }
+  }
+
+  zoom.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") showZoom(zoomIndex - 1);
+    if (event.key === "ArrowRight") showZoom(zoomIndex + 1);
+  });
 
 
   // ------------------------------------------------------------
