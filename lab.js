@@ -76,7 +76,6 @@
       exampleBadge: "Demo · cliente ficticio",
       exampleText: "*Brote* es un vivero online inventado para mostrarte cómo trabajo. La marca y los datos son ficticios. El formato es el mismo que recibís vos.",
       examplePages: [
-        { src: "assets/brote/brote-portada.webp", caption: "El punto de partida" },
         { src: "assets/brote/brote-problema.webp", caption: "El problema, en una frase" },
         { src: "assets/brote/brote-solucion.webp", caption: "La solución, con su mockup" },
         { src: "assets/brote/brote-proximos-pasos.webp", caption: "El plan de acción" }
@@ -162,7 +161,6 @@
       exampleBadge: "Demo · fictional client",
       exampleText: "*Brote* is a made-up online plant shop, created to show you how I work. The brand and the data are fictional. The format is the same one you get. (The example is in Spanish.)",
       examplePages: [
-        { src: "assets/brote/brote-portada.webp", caption: "The starting point" },
         { src: "assets/brote/brote-problema.webp", caption: "The problem, in one sentence" },
         { src: "assets/brote/brote-solucion.webp", caption: "The solution, with its mockup" },
         { src: "assets/brote/brote-proximos-pasos.webp", caption: "The action plan" }
