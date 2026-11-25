@@ -87,8 +87,8 @@
       aboutTitle: "¿Quién está detrás?",
       about: [
         "Soy *Micaela Cañal*, Product Designer.",
-        "Hace *5 años* que diseño experiencias conversacionales, con y sin IA. Hoy diseño la experiencia agéntica de *Kombi*, en Volkswagen Argentina: qué agentes hacen falta, qué hace cada uno y dónde tiene sentido usar IA.",
-        "Estudié *Lingüística* en la UBA y una maestría en *Periodismo Narrativo*. Por eso investigo antes de diseñar: escucho, ordeno y llego a lo que de verdad hay que resolver."
+        "Hace *5 años* que diseño experiencias conversacionales, con y sin IA. Trabajo en *BeBot* y, desde ahí, diseño la experiencia agéntica de *Kombi*, en Volkswagen Argentina: qué agentes hacen falta, qué hace cada uno y dónde tiene sentido usar IA.",
+        "Estudié *Lingüística* en la UBA y una maestría en *Periodismo Narrativo*. Esa formación me dejó un método: primero la evidencia, después las decisiones."
       ],
       aboutLink: "Ver mi portfolio",
 
@@ -173,8 +173,8 @@
       aboutTitle: "Who's behind it?",
       about: [
         "I'm *Micaela Cañal*, a Product Designer.",
-        "I've spent *5 years* designing conversational experiences, with and without AI. Today I design the agentic experience of *Kombi* at Volkswagen Argentina: which agents are needed, what each one does and where AI actually makes sense.",
-        "I studied *Linguistics* at the University of Buenos Aires and earned a master's in *Narrative Journalism*. That's why I research before I design: I listen, organize and get to what really needs to be solved."
+        "I've spent *5 years* designing conversational experiences, with and without AI. I work at *BeBot*, and from there I design the agentic experience of *Kombi* at Volkswagen Argentina: which agents are needed, what each one does and where AI actually makes sense.",
+        "I studied *Linguistics* at the University of Buenos Aires and earned a master's in *Narrative Journalism*. That training gave me a method: evidence first, decisions second."
       ],
       aboutLink: "See my portfolio",
 
