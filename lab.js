@@ -160,13 +160,13 @@
 
       exampleTitle: "Want to see an example?",
       exampleBadge: "Demo · fictional client",
-      exampleText: "*Brote* is an online plant shop. (The example is in Spanish.)",
+      exampleText: "*Brote* is an online plant shop.",
       examplePages: [
-        { src: "assets/brote/brote-problema.webp", caption: "The problem, in one sentence" },
-        { src: "assets/brote/brote-solucion.webp", caption: "The solution, with its mockup" },
-        { src: "assets/brote/brote-proximos-pasos.webp", caption: "The action plan" }
+        { src: "assets/brote/en/brote-problem.webp", caption: "The problem, in one sentence" },
+        { src: "assets/brote/en/brote-solution.webp", caption: "The solution, with its mockup" },
+        { src: "assets/brote/en/brote-action-plan.webp", caption: "The action plan" }
       ],
-      examplePdf: "assets/brote/ejemplo-brote.pdf",
+      examplePdf: "assets/brote/en/example-brote.pdf",
       exampleButton: "See the full report (PDF)",
       zoom: { open: "Enlarge", close: "Close", prev: "Previous", next: "Next", hint: "Tap the image to zoom in" },
 
